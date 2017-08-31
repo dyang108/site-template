@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+  title Edit page
+  link(rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css")
+  link(rel="stylesheet" type="text/css" href="/assets/css/main.css")
+  script(src="/assets/js/vendor/jquery.min.js")
+body
+  <div class="site-header">
+      <a href="/">
+          <div class="logo"></div>
+      </a>
+  </div>
+  script.
+    var allPosts = !{JSON.stringify(posts)}
+  div(class="container")
+    h1 Edit
+    form(class="form-horizontal col-xs-6")
+      h4 Post
+      select(class="form-control input-sm", id="post-id")
+        option(value="new") New post
+        each post in posts
+          option(value='' + post._id)=post.title
+      h4 Title
+      input(class="form-control input-sm", id="title", type="text")
+      h4 Category
+      select(class="form-control input-sm", id="category")
+        option(value="blog") Blog
+        option(value="research") Research
+      div(class="no-padding" style="height: 300px")
+        h4 Body
+        pre(id="editor" class="no-padding")=text
+        h4 Password
+        input(class="form-control input-sm" type="password" id="pwd")
+    div(class="col-xs-6 preview" style="height: 500px")
+      h3 Preview
+      div(id="preview")
+    button(type="button" class="btn btn-primary pull-right" onclick="savePost()") Save
+    button(type="button" class="btn btn-danger pull-right" onclick="deletePost()") Delete
+    br
+    hr
+  script(src="https://cdn.rawgit.com/showdownjs/showdown/1.7.3/dist/showdown.min.js")
+  script(src="/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8")
+  script(src="/assets/js/editor.js")

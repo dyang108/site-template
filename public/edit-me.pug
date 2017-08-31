@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+<head>
+  meta(charset="UTF-8")
+  meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+  title Edit page
+  link(rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css")
+  link(rel="stylesheet" type="text/css" href="/assets/css/main.css")
+  script(src="/assets/js/vendor/jquery.min.js")
+</head>
+body
+  <div class="site-header">
+      <a href="/">
+          <div class="logo"></div>
+      </a>
+  </div>
+  div(class="container")
+    h1 Edit profile
+    div(style="height: 500px;")
+      pre(id="editor" class="no-padding")=user
+    h4 Password
+    input(class="form-control input-sm" type="password" id="pwd")
+    br
+    button(type="button" class="btn btn-primary pull-right" id="saveBtn" onclick="saveMe()") Save
+    br
+    hr
+  script(src="/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8")
+  script(src="/assets/js/edit-me.js")
