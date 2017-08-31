@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kerry Yang</title>
+    title=title
     <meta name="description" content="">
     link(rel="shortcut icon", href="/assets/img/favicon.ico", type="image/x-icon")
     link(rel="stylesheet", href="/assets/css/main.css")
@@ -23,8 +23,8 @@ body
         h1=title
         each post in posts
             hr
-            h3=post.title
-            h6
+            h5(class="label label-default")
                 i!=formatDate(post.updated)
+            h2=post.title
             div!=md(post.body)
     

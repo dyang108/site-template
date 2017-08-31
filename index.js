@@ -64,7 +64,8 @@ var User = mongoose.model('User', new Schema({
   email: String,
   bio: String,
   about: String,
-  propic: String
+  propic: String,
+  logo: String
 }))
 
 var baseUser = require('./userInfo')
@@ -73,7 +74,7 @@ var user = new User(baseUser)
 user.save()
 
 let formatDate = function (d) {
-  return moment(d).format('MMMM D YYYY')
+  return moment(d).format('dddd, MMMM D, YYYY')
 }
 
 app.route('/')
@@ -110,21 +111,28 @@ app.route('/edit')
 
 app.route('/edit-post')
   .post(auth.required(), (req, res) => {
-    Post.findById({
-      _id: req.body._id
-    }).then(post => {
-      if (post) {
-        Object.assign(post, req.body)
-        post.save().then(() => {
-          res.json('{ "status": "success" }')
-        })
-      } else {
-        let p = new Post(req.body)
-        p.save().then(() => {
-          res.json('{ "status": "success" }')
-        })
-      }
-    })
+    if (req.body._id) {
+      Post.findById({
+        _id: req.body._id
+      }).then(post => {
+        if (post) {
+          Object.assign(post, req.body)
+          post.save().then(() => {
+            res.json('{ "status": "success" }')
+          })
+        } else {
+          let p = new Post(req.body)
+          p.save().then(() => {
+            res.json('{ "status": "success" }')
+          })
+        }
+      })
+    } else {
+      let p = new Post(req.body)
+      p.save().then(() => {
+        res.json('{ "status": "success" }')
+      })
+    }
   })
 
 app.route('/delete-post')

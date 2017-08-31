@@ -3,21 +3,21 @@ ul {
 }
 
 a {
-    color: #555;
+    color: #006ab6;
     text-decoration: none;
     margin-right:2px;
 }
 
 a:visited {
-    color: #555;
+    color: #006ab6;
 }
 
 a:hover {
-    color: #16a085;
+    color: #006ab6;
 }
 
 a:link {
-    color: #555;
+    color: #006ab6;
 }
 
 html,

@@ -28,6 +28,15 @@ postId.onchange = function () {
 
 function savePost () {
   var auth = pwd.value
+  var postObj = {
+    title: title.value,
+    body: editor.getValue(),
+    updated: new Date(),
+    category: category.value
+  }
+  if (postId.value !== 'new') {
+    postObj._id = postId.value
+  }
   $.ajax({
     type: 'POST',
     url: '/edit-post',
@@ -35,13 +44,7 @@ function savePost () {
       'Authorization': auth
     },
     contentType: 'application/json;  charset=utf-8',
-    data: JSON.stringify({
-      title: title.value,
-      body: editor.getValue(),
-      updated: new Date(),
-      category: category.value,
-      _id: postId.value
-    }),
+    data: JSON.stringify(postObj),
     dataType: 'json',
     success: (data) => {
       console.log('hi')
@@ -55,6 +58,9 @@ function savePost () {
 
 function deletePost () {
   var auth = pwd.value
+  if (postId.value === 'new') {
+    return
+  }
   $.ajax({
     type: 'POST',
     url: '/delete-post',
