@@ -10,6 +10,5 @@ module.exports = {
   email: 'kyang530@gmail.com',
   bio: 'Hi! I\'m Kerry',
   about: '',
-  propic: '/assets/img/propic.png',
-  logo: '/assets/img/propic.png'
+  propic: '/assets/img/propic.png'
 }

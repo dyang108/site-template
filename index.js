@@ -64,14 +64,21 @@ var User = mongoose.model('User', new Schema({
   email: String,
   bio: String,
   about: String,
-  propic: String,
-  logo: String
+  propic: String
 }))
 
 var baseUser = require('./userInfo')
 
-var user = new User(baseUser)
-user.save()
+User.find({}).then(users => {
+  if (users.length === 0) {
+    var user = new User(baseUser)
+    user.save()
+  } else {
+    let user = users[0]
+    Object.assign(user, baseUser, user)
+    user.save()
+  }
+})
 
 let formatDate = function (d) {
   return moment(d).format('dddd, MMMM D, YYYY')
