@@ -4,7 +4,8 @@
   "description": "a site for kerry",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js"
+    "test": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "dyang108",
   "license": "ISC",
