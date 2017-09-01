@@ -76,7 +76,11 @@ User.find({}).then(users => {
     user.save()
   } else {
     let user = users[0]
-    Object.assign(user, baseUser, Object.assign({}, user))
+    for (let key in baseUser) {
+      if (user[key] === undefined) {
+        user[key] = baseUser[key]
+      }
+    }
     user.save()
   }
 })
