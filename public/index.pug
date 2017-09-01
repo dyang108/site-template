@@ -53,40 +53,39 @@
                             a(href=user.resume)
                                 <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                         if user.email
-                            a(href=user.email)
+                            a(href="mailto:" + user.email)
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                     </div>
                     <hr>
                 </div>
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <ul class="list-unstyled">
-                      <li>
-                        <div class="col-xs-12">
-                          <h3>
-                          a(id="Blog", href="/blog") Blog
-                          </a>
+                    each category in user.categories
+                        <li>
+                          <div class="col-xs-12">
+                            <h3>
+                            a(id='' + category.title, href='' + category.url)=category.title
+                            </a>
+                          </h3>
+                          <hr>
+                          </div>
+                        </li>
+                    <li>
+                      <div class="col-xs-12">
+                        <h3>
+                        a(id="About", href="/about") About
                         </h3>
                         <hr>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="col-xs-12">
-                          <h3>
-                          a(id="Research", href="/research") Research
-                          </a>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="col-xs-12">
+                        <h3>
+                        a(id="Contact", href="/contact") Contact
                         </h3>
                         <hr>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="col-xs-12">
-                          <h3>
-                          a(id="About", href="/about") About
-                          </a>
-                        </h3>
-                        <hr>
-                        </div>
-                      </li>
+                      </div>
+                    </li>
                     </ul>
                 </div>
             </div>
@@ -96,9 +95,9 @@
         <div class="container footer-container">
             <div class="pull-left">
                 a(href="mailto:" + user.email)
-                    h6 Contact
+                    p Contact
             </div>
-            div(class="pull-right")='©' + user.name + '.'
+            div(class="pull-right")='© ' + user.name + '.'
         </div>
     </footer>
     <script>

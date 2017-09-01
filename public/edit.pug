@@ -28,20 +28,19 @@ body
       input(class="form-control input-sm", id="title", type="text")
       h4 Category
       select(class="form-control input-sm", id="category")
-        option(value="blog") Blog
-        option(value="research") Research
-      div(class="no-padding" style="height: 300px")
-        h4 Body
-        pre(id="editor" class="no-padding")=text
-        h4 Password
-        input(class="form-control input-sm" type="password" id="pwd")
+        each category in categories
+          option(value="" + category.url)=category.title
+      //- div(class="no-padding" style="height: 300px")
+      h4 Body
+      pre(id="editor" style="height: 300px" class="no-padding")=text
+      h4 Password
+      input(class="form-control input-sm" type="password" id="pwd")
     div(class="col-xs-6 preview" style="height: 500px")
       h3 Preview
       div(id="preview")
     button(type="button" class="btn btn-primary pull-right" onclick="savePost()") Save
     button(type="button" class="btn btn-danger pull-right" onclick="deletePost()") Delete
-    br
-    hr
+  hr
   script(src="https://cdn.rawgit.com/showdownjs/showdown/1.7.3/dist/showdown.min.js")
   script(src="/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8")
   script(src="/assets/js/editor.js")

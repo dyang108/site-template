@@ -64,7 +64,8 @@ var User = mongoose.model('User', new Schema({
   email: String,
   bio: String,
   about: String,
-  propic: String
+  propic: String,
+  categories: Object
 }))
 
 var baseUser = require('./userInfo')
@@ -91,28 +92,13 @@ app.route('/')
     })
   })
 
-app.route('/blog')
-  .get((req, res, next) => {
-    Post.find({
-      category: 'blog'
-    }).sort('-updated').then(posts => {
-      res.render('posts', {md, formatDate, posts, title: 'Blog'})
-    })
-  })
-
-app.route('/research')
-  .get((req, res, next) => {
-    Post.find({
-      category: 'research'
-    }).sort('-updated').then(posts => {
-      res.render('posts', {md, formatDate, posts, title: 'Research'})
-    })
-  })
-
 app.route('/edit')
   .get((req, res, next) => {
-    Post.find().lean().sort('-updated').then(posts => {
-      res.render('edit', {posts})
+    User.findOne({}).then(user => {
+      let categories = user.categories
+      Post.find().lean().sort('-updated').then(posts => {
+        res.render('edit', {posts, categories})
+      })
     })
   })
 
@@ -173,5 +159,35 @@ app.route('/about')
   .get((req, res) => {
     User.findOne({}).then(user => {
       res.render('about', {md, user})
+    })
+  })
+
+app.route('/contact')
+  .get((req, res) => {
+    User.findOne({}).then(user => {
+      res.render('contact', {md, user})
+    })
+  })
+
+app.route('/:category')
+  .get((req, res, next) => {
+    User.findOne({}).then(user => {
+      let page = user.categories.find(elem => {
+        return elem.url === req.params.category
+      })
+      if (!page) {
+        res.sendStatus(404)
+        return
+      }
+      Post.find({
+        category: req.params.category
+      }).sort('-updated').then(posts => {
+        res.render('posts', {
+          md,
+          formatDate,
+          posts,
+          title: page.title
+        })
+      })
     })
   })
