@@ -65,7 +65,9 @@ var User = mongoose.model('User', new Schema({
   bio: String,
   about: String,
   propic: String,
-  categories: Object
+  categories: Object,
+  contact: String,
+  logo: String
 }))
 
 var baseUser = require('./userInfo')
@@ -190,7 +192,8 @@ app.route('/:category')
           md,
           formatDate,
           posts,
-          title: page.title
+          title: page.title,
+          logo: user.logo
         })
       })
     })

@@ -18,5 +18,6 @@ module.exports = {
     url: 'research',
     title: 'Research'
   }],
-  contact: ''
+  contact: '',
+  logo: '/assets/img/logo.png'
 }
